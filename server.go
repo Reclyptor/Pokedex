@@ -18,7 +18,8 @@ func api(db *gorm.DB, port string, favicon string) {
 	router.Use(func (ctx *gin.Context) { ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*") })
 
 	v1 := router.Group("/api/v1")
-	v1.GET("/pokemon", controller.GetPokedex(db))
+	v1.GET("/pokedex", controller.GetPokedex(db))
+	v1.GET("/pokemon", controller.GetPokemon(db))
 	v1.GET("/pokemon/:id", controller.GetPokemonByID(db))
 	v1.GET("/pokemon/:id/variants", controller.GetPokemonVariantsByID(db))
 	v1.GET("/pokemon/:id/variants/:vid", controller.GetPokemonVariantByID(db))

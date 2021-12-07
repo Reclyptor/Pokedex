@@ -12,6 +12,12 @@ func FindAllPokemon(db *gorm.DB) model.Pokedex {
 	return pokedex
 }
 
+func FindDefaultPokemon(db *gorm.DB) model.Pokedex {
+	var pokedex model.Pokedex
+	_ = db.Where(model.Pokemon{IsDefault: true}).Preload("Types").Preload("Physique").Preload("Abilities").Preload("Statistics").Preload("Training").Preload("Images").Find(&pokedex)
+	return pokedex
+}
+
 func FindPokemonByID(db *gorm.DB, id int) model.Pokemon {
 	var pokemon model.Pokemon
 	_ = db.Where(model.Pokemon{PokedexID: id, IsDefault: true}).Preload(clause.Associations).First(&pokemon)

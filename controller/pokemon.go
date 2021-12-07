@@ -15,6 +15,14 @@ func GetPokedex(db *gorm.DB) gin.HandlerFunc {
 	}
 }
 
+func GetPokemon(db *gorm.DB) gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		pokedex := repository.FindDefaultPokemon(db)
+		ctx.JSON(200, pokedex)
+		ctx.Writer.Flush()
+	}
+}
+
 func GetPokemonByID(db *gorm.DB) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		id, err := strconv.ParseInt(ctx.Param("id"), 10, 0)
