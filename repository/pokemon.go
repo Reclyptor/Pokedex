@@ -27,7 +27,7 @@ func (pokemonRepository PokemonRepository) FindPokedex() model.Pokedex {
 	}
 }
 
-func (pokemonRepository PokemonRepository) FindPokemon() model.Pokedex {
+func (pokemonRepository PokemonRepository) FindPokemon() []model.Pokemon {
 	if pokemon, found := pokemonRepository.cache.Get("pokemon"); found {
 		return pokemon.([]model.Pokemon)
 	} else {
@@ -40,7 +40,7 @@ func (pokemonRepository PokemonRepository) FindPokemon() model.Pokedex {
 
 func (pokemonRepository PokemonRepository) FindPokemonByID(id int) model.Pokemon {
 	var pokemon model.Pokemon
-	_ = pokemonRepository.db.Where(model.Pokemon{PokedexID: id, IsDefault: true}).Preload(clause.Associations).First(&pokemon)
+	_ = pokemonRepository.db.Where(model.Pokemon{PokedexID: id, IsDefault: true}).Preload(clause.Associations).Take(&pokemon)
 	return pokemon
 }
 
