@@ -68,3 +68,26 @@ type Image struct {
 	Image     string `json:"image" gorm:"column:image"`
 	Src       string `json:"src"   gorm:"column:src"`
 }
+
+type Type string
+const (
+	NORMAL   Type = "Normal"
+	FIRE     Type = "Fire"
+	WATER    Type = "Water"
+	GRASS    Type = "Grass"
+	ELECTRIC Type = "Electric"
+	ICE      Type = "Ice"
+	FIGHTING Type = "Fighting"
+	POISON   Type = "Poison"
+	GROUND   Type = "Ground"
+	FLYING   Type = "Flying"
+	PSYCHIC  Type = "Psychic"
+	BUG      Type = "Bug"
+	ROCK     Type = "Rock"
+	GHOST    Type = "Ghost"
+	DARK     Type = "Dark"
+	DRAGON   Type = "Dragon"
+	STEEL    Type = "Steel"
+	FAIRY    Type = "Fairy"
+	NONE     Type = ""
+)
