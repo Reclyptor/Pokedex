@@ -11,7 +11,7 @@ type PokemonController struct {
 }
 
 func NewPokemonController(repo repository.PokemonRepository) PokemonController {
-	return PokemonController{repo }
+	return PokemonController{repo}
 }
 
 func (ctrl PokemonController) GetPokedex(ctx *gin.Context) {
@@ -20,7 +20,22 @@ func (ctrl PokemonController) GetPokedex(ctx *gin.Context) {
 }
 
 func (ctrl PokemonController) GetPokemon(ctx *gin.Context) {
-	ctx.JSON(200, ctrl.repo.FindPokemon())
+	limit, err := strconv.Atoi(ctx.Query("limit"))
+	if err != nil {
+		limit = -1
+	}
+
+	offset, err := strconv.Atoi(ctx.Query("offset"))
+	if err != nil {
+		offset = -1
+	}
+
+	if limit < 0 || offset < 0 {
+		ctx.JSON(200, ctrl.repo.FindAllPokemon())
+	} else {
+		ctx.JSON(200, ctrl.repo.FindPokemon(limit, offset))
+	}
+
 	ctx.Writer.Flush()
 }
 

@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"github.com/patrickmn/go-cache"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -8,7 +9,7 @@ import (
 )
 
 type PokemonRepository struct {
-	db *gorm.DB
+	db    *gorm.DB
 	cache *cache.Cache
 }
 
@@ -27,13 +28,24 @@ func (pokemonRepository PokemonRepository) FindPokedex() model.Pokedex {
 	}
 }
 
-func (pokemonRepository PokemonRepository) FindPokemon() []model.Pokemon {
+func (pokemonRepository PokemonRepository) FindAllPokemon() []model.Pokemon {
 	if pokemon, found := pokemonRepository.cache.Get("pokemon"); found {
 		return pokemon.([]model.Pokemon)
 	} else {
 		var pokemon []model.Pokemon
 		_ = pokemonRepository.db.Where(model.Pokemon{IsDefault: true}).Preload("Types").Preload("Physique").Preload("Abilities").Preload("Statistics").Preload("Training").Preload("Images").Find(&pokemon)
 		pokemonRepository.cache.Set("pokemon", pokemon, cache.DefaultExpiration)
+		return pokemon
+	}
+}
+
+func (pokemonRepository PokemonRepository) FindPokemon(limit int, offset int) []model.Pokemon {
+	if pokemon, found := pokemonRepository.cache.Get(fmt.Sprintf("pokemon|%d|%d", limit, offset)); found {
+		return pokemon.([]model.Pokemon)
+	} else {
+		var pokemon []model.Pokemon
+		_ = pokemonRepository.db.Where(model.Pokemon{IsDefault: true}).Preload("Types").Preload("Physique").Preload("Abilities").Preload("Statistics").Preload("Training").Preload("Images").Limit(limit).Offset(offset).Find(&pokemon)
+		pokemonRepository.cache.Set(fmt.Sprintf("pokemon|%d|%d", limit, offset), pokemon, cache.DefaultExpiration)
 		return pokemon
 	}
 }
@@ -53,8 +65,8 @@ func (pokemonRepository PokemonRepository) FindPokemonVariantsByID(id int) []mod
 func (pokemonRepository PokemonRepository) FindPokemonVariantByID(id int, vid int) *model.Pokemon {
 	var variants []model.Pokemon
 	_ = pokemonRepository.db.Where(model.Pokemon{PokedexID: id, IsDefault: false}, "PokedexID", "IsDefault").Preload(clause.Associations).Find(&variants)
-	if len(variants) > vid - 1 {
-		return &variants[vid - 1]
+	if len(variants) > vid-1 {
+		return &variants[vid-1]
 	} else {
 		return nil
 	}
