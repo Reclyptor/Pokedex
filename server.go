@@ -14,16 +14,18 @@ func api(db *gorm.DB, ch *cache.Cache, port string, favicon string) {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.StaticFile("/favicon.ico", favicon)
-	router.Use(func (ctx *gin.Context) { ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*") })
+	router.Use(func(ctx *gin.Context) { ctx.Writer.Header().Set("Access-Control-Allow-Origin", "*") })
+
+	pokemoncontroller := controller.NewPokemonController(repository.NewPokemonRepository(db, ch))
+	pokedexcontroller := controller.NewPokedexController(repository.NewPokedexRepository(db, ch))
 
 	v1 := router.Group("/api/v1")
-	repo := repository.NewPokemonRepository(db, ch)
-	ctrl := controller.NewPokemonController(repo)
-	v1.GET("/pokedex", ctrl.GetPokedex)
-	v1.GET("/pokemon", ctrl.GetPokemon)
-	v1.GET("/pokemon/:id", ctrl.GetPokemonByID)
-	v1.GET("/pokemon/:id/variants", ctrl.GetPokemonVariantsByID)
-	v1.GET("/pokemon/:id/variants/:vid", ctrl.GetPokemonVariantByID)
+	v1.GET("/pokedex", pokedexcontroller.GetPokedex)
+	v1.GET("/pokedex/:id", pokedexcontroller.GetPokedexByID)
+	v1.GET("/pokemon", pokemoncontroller.GetPokemon)
+	v1.GET("/pokemon/:id", pokemoncontroller.GetPokemonByID)
+	v1.GET("/pokemon/:id/variants", pokemoncontroller.GetPokemonVariantsByID)
+	v1.GET("/pokemon/:id/variants/:vid", pokemoncontroller.GetPokemonVariantByID)
 
 	log.Fatal(router.Run("0.0.0.0:" + port))
 }

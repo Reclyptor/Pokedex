@@ -1,24 +1,22 @@
 package model
 
-type Pokedex []Pokemon
-
 func (Pokemon) TableName() string { return "pokemon" }
 type Pokemon struct {
-	PokemonID    int        `json:"-"          gorm:"column:pokemonID;primaryKey"`
-	PokedexID    int        `json:"id"         gorm:"column:pokedexID"`
-	Generation   int        `json:"generation" gorm:"column:generation"`
-	IsDefault    bool       `json:"isDefault"  gorm:"column:isDefault"`
-	Name         string     `json:"name"       gorm:"column:name"`
-	Species      string     `json:"species"    gorm:"column:species"`
-	Variant      string     `json:"variant"    gorm:"column:variant"`
-	Status       string     `json:"status"     gorm:"column:status"`
-	Shape        string     `json:"shape"      gorm:"column:shape"`
-	Types        Types      `json:"types"      gorm:"foreignKey:PokemonID"`
-	Physique     Physique   `json:"physique"   gorm:"foreignKey:PokemonID"`
-	Abilities    Abilities  `json:"abilities"  gorm:"foreignKey:PokemonID"`
-	Statistics   Statistics `json:"statistics" gorm:"foreignKey:PokemonID"`
-	Training     Training   `json:"training"   gorm:"foreignKey:PokemonID"`
-	Images       []Image    `json:"images"     gorm:"foreignKey:PokemonID"`
+	PokemonID      int        `json:"-"          gorm:"column:pokemonID;primaryKey"`
+	PokedexNumber  int        `json:"id"         gorm:"column:pokedexNumber"`
+	Generation     int        `json:"generation" gorm:"column:generation"`
+	IsDefault      bool       `json:"isDefault"  gorm:"column:isDefault"`
+	Name           string     `json:"name"       gorm:"column:name"`
+	Species        string     `json:"species"    gorm:"column:species"`
+	Variant        string     `json:"variant"    gorm:"column:variant"`
+	Status         string     `json:"status"     gorm:"column:status"`
+	Shape          string     `json:"shape"      gorm:"column:shape"`
+	Types          Types      `json:"types"      gorm:"foreignKey:PokemonID;references:PokemonID"`
+	Physique       Physique   `json:"physique"   gorm:"foreignKey:PokemonID;references:PokemonID"`
+	Abilities      Abilities  `json:"abilities"  gorm:"foreignKey:PokemonID;references:PokemonID"`
+	Statistics     Statistics `json:"statistics" gorm:"foreignKey:PokemonID;references:PokemonID"`
+	Training       Training   `json:"training"   gorm:"foreignKey:PokemonID;references:PokemonID"`
+	Images         []Image    `json:"images"     gorm:"foreignKey:PokemonID;references:PokemonID"`
 }
 
 func (Types) TableName() string { return "types" }

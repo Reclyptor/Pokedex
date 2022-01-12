@@ -14,11 +14,6 @@ func NewPokemonController(repo repository.PokemonRepository) PokemonController {
 	return PokemonController{repo}
 }
 
-func (ctrl PokemonController) GetPokedex(ctx *gin.Context) {
-	ctx.JSON(200, ctrl.repo.FindPokedex())
-	ctx.Writer.Flush()
-}
-
 func (ctrl PokemonController) GetPokemon(ctx *gin.Context) {
 	limit, err := strconv.Atoi(ctx.Query("limit"))
 	if err != nil {
