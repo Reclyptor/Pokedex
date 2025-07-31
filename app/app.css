@@ -3,14 +3,28 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --color-background: #212121;
-  --color-surface: #2B2B2B;
-  --color-border: #2B2B2B;
+  --color-background-light: #2F3132;
+  --color-background-dark: #252728;
+  --color-surface: #181A1B;
+  --color-neutral: #C4BDB2;
+  --color-primary: #9D9588;
+  --color-secondary: #616161;
+  --color-tertiary: #1E2021;
+  --color-gray: #565D61;
+  --color-red: #B62A0A;
+  --color-orange: #AC400E;
+  --color-yellow: #80660F;
+  --color-green: #3E8A49;
+  --color-teal: #2080A7;
+  --color-blue: #164295;
+  --color-lcd-light: #A8C64E;
+  --color-lcd-dark: #3C412C;
 }
 
 html,
 body {
-  @apply bg-[#212121] dark:bg-[#212121];
+  @apply bg-[repeating-linear-gradient(-45deg,var(--color-background-light),var(--color-background-light)_10px,var(--color-background-dark)_10px,var(--color-background-dark)_20px)];
+  @apply dark:bg-[repeating-linear-gradient(-45deg,var(--color-background-light),var(--color-background-light)_10px,var(--color-background-dark)_10px,var(--color-background-dark)_20px)];
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;

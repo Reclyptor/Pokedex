@@ -1,6 +1,8 @@
+
 const Pokedex = () => {
   return (
-    <div></div>
+    <div className="">
+    </div>
   );
 };
 
