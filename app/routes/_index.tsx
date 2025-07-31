@@ -1,5 +1,6 @@
-import {Outlet, useNavigate} from "react-router";
-import {useEffect, useMemo} from "react";
+import { Outlet, useNavigate } from "react-router";
+import { useEffect, useMemo } from "react";
+import Sidebar from "~/component/Sidebar";
 import Main from "~/layout/Main";
 
 const Index = () => {
@@ -9,20 +10,26 @@ const Index = () => {
     navigate("/pokedex");
   }, []);
 
+  const sidebar = useMemo(() => {
+    return (
+      <Sidebar open className="bg-surface" />
+    );
+  }, []);
+
   const header = useMemo(() => {
     return (
-      <span className="text-center text-[10px] py-1 w-fit leading-[10px]">PokemonChamber</span>
+      <span className="flex items-center justify-center w-full text-neutral font-bold text-center text-lg py-2 bg-red">Pokedex</span>
     );
   }, []);
 
   const footer = useMemo(() => {
     return (
-      <span className="text-center text-[10px] py-1 w-fit leading-[10px]">PokemonChamber is a fan site unaffiliated with The Pokémon Company. All Pokémon content and materials are trademarks and copyrights of The Pokémon Company International, Inc.</span>
+      <span className="flex items-center justify-center w-full text-neutral text-center text-[10px] py-1 leading-[10px] bg-background-dark">This fan site is not affiliated with The Pokémon Company. All Pokémon content and materials are trademarks and copyrights of The Pokémon Company International, Inc.</span>
     );
   }, []);
 
   return (
-    <Main header={ header } footer={ footer } className="w-screen h-screen [&>header]:border-b [&>header]:border-b-border [&>footer]:border-t [&>footer]:border-t-border">
+    <Main sidebar={ sidebar } header={ header } footer={ footer } className="w-screen h-screen bg-lcd-dark/75">
       <Outlet />
     </Main>
   );

@@ -16,7 +16,7 @@ const Main = (props: MainProps) => {
       <aside className="flex h-full">
         { props.sidebar }
       </aside>
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-grow">
         <header className="w-full">
           { props.header }
         </header>
