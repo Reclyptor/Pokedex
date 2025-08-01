@@ -1,16 +1,13 @@
-import { Outlet, useNavigate } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import {useEffect, useMemo, useState} from "react";
 import Sidebar from "~/component/Sidebar";
 import Main from "~/layout/Main";
 import Cover from "~/component/Cover";
 
 const Index = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const [open, setOpen] = useState<boolean>(false);
-
-  useEffect(() => {
-    navigate("/pokedex");
-  }, []);
+  const [open, setOpen] = useState<boolean>(location.pathname !== "/");
 
   const sidebar = useMemo(() => {
     return (
@@ -30,10 +27,16 @@ const Index = () => {
     );
   }, []);
 
+  useEffect(() => {
+    if (open) {
+      navigate("/pokedex", { replace: true });
+    }
+  }, [open]);
+
   return (
     <Main sidebar={ sidebar } header={ header } footer={ footer } className="w-screen h-screen bg-lcd-dark/75">
       <Cover open={ open } onChange={ setOpen } className="w-full h-full">
-        <Outlet />
+        { location?.pathname !== "/" && <Outlet /> }
       </Cover>
     </Main>
   );
