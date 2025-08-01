@@ -12,13 +12,13 @@ const Index = () => {
 
   const sidebar = useMemo(() => {
     return (
-      <Sidebar open className="bg-surface" />
+      <Sidebar open />
     );
   }, []);
 
   const header = useMemo(() => {
     return (
-      <span className="flex items-center justify-center w-full text-neutral font-bold text-center text-lg py-2 bg-red">Pokedex</span>
+      <span className="flex items-center justify-center w-full h-[56px] text-neutral font-bold text-center text-lg py-2 bg-red border-b-2 border-b-black">Pokedex</span>
     );
   }, []);
 
