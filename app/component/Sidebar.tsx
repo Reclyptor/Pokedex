@@ -39,8 +39,7 @@ const Sidebar = (props: SidebarProps) => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -55 256 56" className="border-r-2 border-r-black">
         <path d="m 0 0 L 100 0 C 108 0 148 -54 156 -54 L 256 -54" stroke="#000000" stroke-width="2" fill="none"/>
       </svg>
-      <div className="relative w-full flex-grow border-r-2 border-r-black">
-        <div className="absolute top-1/2 right-0 bottom-0 left-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0),rgba(0,0,0,.6))] pointer-events-none z-[1]" />
+      <div className="w-full flex-grow border-r-2 border-r-black">
       </div>
     </div>
   );
