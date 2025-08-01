@@ -12,7 +12,7 @@ import "./app.css";
 
 export const meta = () => {
   return [
-    { title: "PokemonChamber" },
+    { title: "Pokedex" },
     { name: "description", content: "" },
   ];
 };
