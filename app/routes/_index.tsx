@@ -11,7 +11,7 @@ const Index = () => {
 
   const sidebar = useMemo(() => {
     return (
-      <Sidebar open />
+      <Sidebar open className="bg-surface/95" />
     );
   }, []);
 
