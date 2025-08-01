@@ -7,13 +7,15 @@ import Cover from "~/component/Cover";
 const Index = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [open, setOpen] = useState<boolean>(location.pathname !== "/");
+  const [coverOpen, setCoverOpen] = useState<boolean>(location.pathname !== "/");
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(location.pathname !== "/");
+  const [ready, setReady] = useState<boolean>(location.pathname !== "/");
 
   const sidebar = useMemo(() => {
     return (
-      <Sidebar open className="bg-surface/95" />
+      <Sidebar open={ sidebarOpen } onReady={ () => setReady(true) } className="bg-surface/95" />
     );
-  }, []);
+  }, [sidebarOpen]);
 
   const header = useMemo(() => {
     return (
@@ -28,15 +30,19 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    if (open) {
+    setSidebarOpen(coverOpen);
+  }, [coverOpen]);
+
+  useEffect(() => {
+    if (location.pathname === "/" && coverOpen && sidebarOpen && ready) {
       navigate("/pokedex", { replace: true });
     }
-  }, [open]);
+  }, [location, navigate, coverOpen, sidebarOpen, ready]);
 
   return (
     <Main sidebar={ sidebar } header={ header } footer={ footer } className="w-screen h-screen bg-lcd-dark/75">
-      <Cover open={ open } onChange={ setOpen } className="w-full h-full">
-        { location?.pathname !== "/" && <Outlet /> }
+      <Cover open={ coverOpen } onChange={ setCoverOpen } className="w-full h-full">
+        { location.pathname !== "/" && <Outlet /> }
       </Cover>
     </Main>
   );
