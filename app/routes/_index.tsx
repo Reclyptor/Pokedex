@@ -1,11 +1,12 @@
 import { Outlet, useNavigate } from "react-router";
-import { useEffect, useMemo } from "react";
+import {useEffect, useMemo, useState} from "react";
 import Sidebar from "~/component/Sidebar";
 import Main from "~/layout/Main";
 import Cover from "~/component/Cover";
 
 const Index = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
     navigate("/pokedex");
@@ -31,7 +32,7 @@ const Index = () => {
 
   return (
     <Main sidebar={ sidebar } header={ header } footer={ footer } className="w-screen h-screen bg-lcd-dark/75">
-      <Cover open className="w-full h-full">
+      <Cover open={ open } onChange={ setOpen } className="w-full h-full">
         <Outlet />
       </Cover>
     </Main>
