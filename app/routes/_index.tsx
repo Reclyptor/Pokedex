@@ -17,7 +17,7 @@ const Index = () => {
 
   const header = useMemo(() => {
     return (
-      <span className="flex items-center justify-center w-full h-[56px] text-black font-extrabold text-center text-lg py-2 bg-red border-b-2 border-b-black">Pokedex</span>
+      <span className="flex items-center justify-center w-full h-[56px] text-black font-extrabold text-center text-lg py-2 bg-red border-b-2 border-b-black" />
     );
   }, []);
 
