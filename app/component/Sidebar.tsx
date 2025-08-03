@@ -52,19 +52,11 @@ const Sidebar = (props: SidebarProps) => {
           </div>
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -55 256 56" className="absolute top-[54px] z-[1]">
-        {/* Red fill with no stroke */}
-        <path d="m 0 -54 L 156 -54 L 256 -54 L 256 -54 L 0 -54 L 0 0 L 100 0 C 108 0 148 -54 156 -54" fill="#B62A0A" stroke="none" />
-        {/* Top-left border (from 0,-54 to 156,-54) */}
-        <path d="m 0 -54 L 156 -54" stroke="#B62A0A" strokeWidth="2" fill="none" />
-        {/* Top-right border (from 156,-54 to 256,-54) */}
-        <path d="m 156 -54 L 256 -54" stroke="#000000" strokeWidth="2" fill="none" />
-        {/* Left border (from 0,-54 to 0,0) */}
-        <path d="m 0 -54 L 0 0" stroke="#B62A0A" strokeWidth="2" fill="none" />
-        {/* Bottom-left border (from 0,0 to 100,0) */}
-        <path d="m 0 0 L 100 0" stroke="#000000" strokeWidth="2" fill="none" />
-        {/* Curved border (from 100,0 to 156,-54) */}
-        <path d="m 100 0 C 108 0 148 -54 156 -54" stroke="#000000" strokeWidth="2" fill="none" />
+      <svg viewBox="0 -55 256 56" className="absolute top-[54px] z-[1]" version="1.1" width="256" height="56" xmlns="http://www.w3.org/2000/svg">
+        <path d="m 0,-55 c 0,18.666667 0,37.333333 0,56 33.333333,0 66.666667,0 100,0 8.47721,-3.9276261 13.80479,-12.414045 20.20874,-18.959045 11.2166,-12.178426 20.76087,-26.225719 33.93188,-36.412049 L 156,-55" fill="#b62a0a" stroke="none" id="path1" />
+        <path d="m 156,-54.5 c 33.33333,0 66.66667,0 100,0" stroke="#000000" strokeWidth="2" fill="none" id="path3" />
+        <path d="m 0,0.5 c 33.333333,0 66.666667,0 100,0" stroke="#000000" strokeWidth="2" fill="none" id="path5" />
+        <path d="m 100,0.5 c 7.5,0 48.5,-55 56,-55" stroke="#000000" strokeWidth="2" fill="none" id="path6" />
       </svg>
       <div className="w-full flex-grow border-r-2 border-r-black">
         { !open ? <div className={ clsx("w-full h-full pt-[56px] bg-red transition-transform duration-500 ease-in-out", { "-translate-x-full": animating } ) } /> :
