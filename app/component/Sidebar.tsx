@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
+import { type ReactNode, useEffect, useState } from "react";
 import clsx from "clsx";
-import { type ReactNode, useEffect, useMemo, useState } from "react";
 
 export type SidebarProps = {
   open?: boolean;
@@ -25,7 +25,7 @@ const Sidebar = (props: SidebarProps) => {
   }, [props.open]);
 
   return (
-    <div className={ twMerge(clsx("relative flex flex-col w-[256px] h-full", props.className)) }>
+    <div className={ twMerge(clsx("relative flex flex-col w-[256px] h-full bg-surface", props.className)) }>
       <div className="flex items-center w-full h-[54px] px-6 gap-x-4 bg-red">
         <div className="w-fit h-fit rounded-full border-3 border-black bg-black/80">
           <div className="w-fit h-fit rounded-full border-2 border-primary bg-black/80">

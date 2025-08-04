@@ -13,7 +13,7 @@ const Index = () => {
 
   const sidebar = useMemo(() => {
     return (
-      <Sidebar open={ sidebarOpen } onReady={ () => setReady(true) } className="bg-surface/95" />
+      <Sidebar open={ sidebarOpen } onReady={ () => setReady(true) } className="" />
     );
   }, [sidebarOpen]);
 
@@ -40,7 +40,7 @@ const Index = () => {
   }, [location, navigate, coverOpen, sidebarOpen, ready]);
 
   return (
-    <Main sidebar={ sidebar } header={ header } footer={ footer } className="w-screen h-screen bg-lcd-dark/75">
+    <Main sidebar={ sidebar } header={ header } footer={ footer } className="w-screen h-screen">
       <Cover open={ coverOpen } onChange={ setCoverOpen } className="w-full h-full">
         { location.pathname !== "/" && <Outlet /> }
       </Cover>
